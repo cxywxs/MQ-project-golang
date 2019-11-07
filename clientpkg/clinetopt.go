@@ -17,6 +17,7 @@ func PushMsg(msg entity.Msg, conn net.Conn) error {
 	if err != nil {
 		fmt.Println("Make json err", err)
 	}
+
 	_, err = conn.Write(json)
 	if err != nil {
 		conn = Login("chen", "123456")
@@ -99,7 +100,7 @@ func ReadMsg() {
 
 //登陆模块
 func Login(user, password string) net.Conn {
-	conn, err := net.DialTimeout("tcp", "127.0.0.1:6010", time.Second*5)
+	conn, err := net.Dial("tcp", "127.0.0.1:6010")
 	if err != nil {
 		fmt.Println("Conn err", err)
 
@@ -120,7 +121,7 @@ func EditMsg() entity.Msg {
 	msg.To = to
 	msg.From = from
 	msg.Body = body
-	msg.Time = time.Now().Format("2006-11 22:36")
+	msg.Time = time.Now().Format("2006-1114 22:36")
 	return msg
 
 }
